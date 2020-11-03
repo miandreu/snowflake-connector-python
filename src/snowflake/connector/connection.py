@@ -203,6 +203,7 @@ class SnowflakeConnection(object):
         self._errorhandler = Error.default_errorhandler
         self._lock_converter = Lock()
         self.messages = []
+        self.telemetry_enabled = False
         logger.info(
             "Snowflake Connector for Python Version: %s, "
             "Python Version: %s, Platform: %s",
@@ -218,7 +219,6 @@ class SnowflakeConnection(object):
         self.converter = None
         self.connect(**kwargs)
         self._telemetry = TelemetryClient(self._rest)
-        self.telemetry_enabled = False
         self.incident = IncidentAPI(self._rest)
 
     def __del__(self):
